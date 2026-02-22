@@ -3,9 +3,8 @@ const mongoose = require('mongoose');
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-
+//Conexión a la BD
 mongoose.connect('mongodb://127.0.0.1:27017/ticoAuto');
-
 const database = mongoose.connection;
 
 database.on('error', (error) => {
@@ -16,6 +15,8 @@ database.once('connected', () => {
     console.log('Conexión a la BD exitosa');
 });
 
+
+//Creación del servidor
 const app = express();
 
 //middleswares
@@ -26,7 +27,7 @@ app.use(cors({
 }));
 
 
-
+//Inicialización del servidor
 app.listen(3001, () => {
     console.log("Servidor corriendo en puerto 3001");
 });
