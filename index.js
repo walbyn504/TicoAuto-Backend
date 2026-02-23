@@ -27,6 +27,9 @@ app.use(cors({
 }));
 
 
+//Rutas
+app.use('/api', require('./rutas/vehiculos'));
+
 //Inicialización del servidor
 app.listen(3001, () => {
     console.log("Servidor corriendo en puerto 3001");
