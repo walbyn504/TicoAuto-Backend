@@ -22,8 +22,8 @@ const editarVehiculo = async (req, res) => {
     try {
         const id = req.params.id;
         const body = req.body;
-        const opciopnes = { new: true };
-        const updatedVehiculo = await Vehiculo.findByIdAndUpdate(id, body, opciopnes);
+        const opciones = { new: true };
+        const updatedVehiculo = await Vehiculo.findByIdAndUpdate(id, body, opciones);
         if (!updatedVehiculo) { 
             return res.status(404);
         }
