@@ -10,13 +10,13 @@ const {
 
 const { verificarToken } = require('../controladores/autenticacion');
 
-// Ruta para crear un nuevo vehículo
+// Crear un nuevo vehículo
 router.post('/vehiculo', verificarToken, crearVehiculo)
 
-// Ruta para editar un vehículo existente
+// Editar un vehículo existente
 router.put('/vehiculo/:id', verificarToken, editarVehiculo)
 
-// Ruta para eliminar un vehículo existente
+// Eliminar un vehículo existente
 router.delete('/vehiculo/:id', verificarToken, eliminarVehiculo)
 
 // Cambiar estado del vehículo a vendido
