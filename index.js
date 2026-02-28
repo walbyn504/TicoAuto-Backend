@@ -29,6 +29,7 @@ app.use(cors({
 
 //Rutas
 app.use('/api', require('./rutas/vehiculos'));
+app.use('/api', require('./rutas/autenticacion'));
 
 //Inicialización del servidor
 app.listen(3001, () => {
