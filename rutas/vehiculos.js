@@ -6,9 +6,10 @@ const multer = require('multer');
 const { 
     crearVehiculo,
     editarVehiculo,
+    obtenerVehiculos,
+    obtenerVehiculoPorId,
     eliminarVehiculo,
     marcarVendido,
-    obtenerVehiculos
  } = require("../controladores/vehiculo");
 
 const { verificarToken } = require('../controladores/autenticacion');
@@ -26,9 +27,11 @@ router.post('/vehiculo', verificarToken, upload.single('imagen'), crearVehiculo)
 // Editar un vehículo existente
 router.put('/vehiculo/:id', verificarToken, upload.single('imagen'), editarVehiculo);
 
-
 // Obtener todos los vehículos
 router.get('/vehiculos', obtenerVehiculos)
+
+// Obtener un vehículo por ID
+router.get('/vehiculo/:id', verificarToken, obtenerVehiculoPorId);
 
 // Eliminar un vehículo existente
 router.delete('/vehiculo/:id', verificarToken, eliminarVehiculo)
