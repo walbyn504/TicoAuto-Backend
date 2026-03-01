@@ -22,11 +22,20 @@ const vehiculoSchema = new mongoose.Schema({
         required: true
     },
 
+    imagen: { 
+        type: String, 
+        required: true 
+    },  
+
     // En estado, puede ser "disponible" o "vendido". Por defecto será "disponible"
     estado: {
         type: String,
         enum: ['disponible', 'vendido'],
         default: 'disponible'
+    },
+
+    imagen: {
+        type: String
     },
 
     // Cada vehículo tiene un usuario (dueño)
