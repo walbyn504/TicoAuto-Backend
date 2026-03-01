@@ -3,7 +3,8 @@ const router = express.Router();
 
 const { registrarUsuario, 
         generarToken } = require('../controladores/autenticacion');
-
+  
+        
 // Ruta para registrar un nuevo usuario
 router.post('/autenticacion', registrarUsuario);
 
