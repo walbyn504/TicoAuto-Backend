@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 const multer = require('multer');
 
-const {marcarVendido,} = require("../controladores/vehiculo");
+const {marcarVendido} = require("../controladores/vehiculos/marcarVendido");
 const { verificarToken } = require('../controladores/autenticacion');
 const { crearVehiculo } = require('../controladores/vehiculos/crearVehiculo');
 const { editarVehiculo } = require('../controladores/vehiculos/editarVehiculo');
