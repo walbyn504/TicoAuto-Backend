@@ -7,7 +7,7 @@ const crearVehiculo = async (req, res) => {
             modelo: req.body.modelo,
             anno: req.body.anno,
             precio: req.body.precio,
-            imagen: req.file.name,
+            imagen: req.file.filename,
             usuario: req.usuario._id
         });
 
@@ -25,6 +25,12 @@ const editarVehiculo = async (req, res) => {
     try {
         const id = req.params.id;
         const body = req.body;
+
+        // Si el usuario sube una nueva imagen, usamos el nombre del archivo generado por Multer
+        if (req.file) {
+            body.imagen = req.file.filename;
+        }
+
         const opciones = { new: true };
         const updatedVehiculo = await Vehiculo.findByIdAndUpdate(id, body, opciones);
         if (!updatedVehiculo) { 
