@@ -14,7 +14,7 @@ const { eliminarVehiculo } = require('../controladores/vehiculos/eliminarVehicul
 const storage = multer.diskStorage({
     // Guardar las imágenes en la carpeta "imagenes"
     destination: (req, file, cb) => cb(null, 'imagenes/'),
-    filename: (req, file, cb) => cb(null, file.originalname)
+    filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
 });
 
 const upload = multer({ storage });
