@@ -26,7 +26,6 @@ router.post('/vehiculo', verificarToken, upload.single('imagen'), crearVehiculo)
 // Editar un vehículo existente
 router.put('/vehiculo/:id', verificarToken, upload.single('imagen'), editarVehiculo);
 
-router.put('/vehiculo/:id', verificarToken, editarVehiculo)
 
 // Obtener todos los vehículos
 router.get('/vehiculos', obtenerVehiculos)
