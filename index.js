@@ -1,10 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
 //Conexión a la BD
-mongoose.connect('mongodb://127.0.0.1:27017/ticoAuto');
+mongoose.connect(process.env.MONGO_URI);
 const database = mongoose.connection;
 
 database.on('error', (error) => {
@@ -35,6 +36,6 @@ app.use('/api', require('./rutas/vehiculos'));
 app.use('/api', require('./rutas/autenticacion'));
 
 //Inicialización del servidor
-app.listen(3001, () => {
-    console.log("Servidor corriendo en puerto 3001");
+app.listen(process.env.PORT, () => {
+    console.log(`Servidor corriendo en puerto ${process.env.PORT}`);
 });
