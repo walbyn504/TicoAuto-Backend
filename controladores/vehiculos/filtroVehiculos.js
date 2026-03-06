@@ -1,20 +1,27 @@
 const Vehiculo = require('../../modelos/Vehiculo');
 
+
 const filtroVehiculos = async (req, res) => {
   try {
-    const { marca, modelo, año_min, año_max, precio_min, precio_max, estado } = req.query;
+    const { marca, modelo, anno_min, anno_max, precio_min, precio_max, estado } = req.query;
     const filtro = {};
 
-    if (marca) {
-        filtro.marca = marca;       
-    } 
+if (marca) {
+    filtro.marca = { 
+        $regex: marca,
+        $options: "i" 
+    };
+}
     if (modelo) {
-        filtro.modelo = modelo;
+        filtro.modelo = {
+            $regex: modelo,
+            $options: "i"
+        };
     }
-    if (año_min || año_max) {
-        filtro.año = {};                    
-        if (año_min) filtro.año.$gte = parseInt(año_min); 
-        if (año_max) filtro.año.$lte = parseInt(año_max);
+    if (anno_min || anno_max) {
+        filtro.anno = {};                    
+        if (anno_min) filtro.anno.$gte = parseInt(anno_min); 
+        if (anno_max) filtro.anno.$lte = parseInt(anno_max);
     }
     if (precio_min || precio_max) {
         filtro.precio = {};
@@ -26,10 +33,18 @@ const filtroVehiculos = async (req, res) => {
     }
 
     const vehiculos = await Vehiculo.find(filtro);
+
+    if (vehiculos.length === 0) {
+        return res.status(404).json({ message: "No se encontraron vehiculos con el filtro aplicado"});
+    }
+
     res.status(200).json(vehiculos);
+
   } catch (error) {
     res.status(500).json({ message: "Error al filtrar vehículos", error: error.message });
   }
 };
 
-module.exports = filtroVehiculos; 
+module.exports = {
+    filtroVehiculos
+};
