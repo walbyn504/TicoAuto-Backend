@@ -85,7 +85,11 @@ const generarToken = async (req, res) => {
         {expiresIn: process.env.JWT_EXPIRES}
     );
 
-        return res.status(200).json({ token });
+        return res.status(200).json({
+            token,
+            nombre: usuarioEncontrado.nombre
+        });
+        
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
