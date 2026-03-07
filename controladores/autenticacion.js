@@ -18,7 +18,7 @@ const validarContrasenna = (contrasenna) => {
 
 
 const registrarUsuario = async (req, res) => {
-    const { nombre, primerApellido, segundoApellido, correo, contrasenna } = req.body;
+    const { nombre, primerApellido, segundoApellido, telefono, correo, contrasenna } = req.body;
 
     try {
         // Verificar si el correo ya está registrado
@@ -42,6 +42,7 @@ const registrarUsuario = async (req, res) => {
             nombre,
             primerApellido,
             segundoApellido,
+            telefono,
             correo,
             contrasenna: hashedContrasenna
         });
