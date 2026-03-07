@@ -16,6 +16,11 @@ const usuarioSchema = new mongoose.Schema({
         required: true
     },
 
+    telefono:{
+        type: String,
+        required: true
+    },
+
     correo: {
         type: String,
         required: true,
@@ -27,11 +32,6 @@ const usuarioSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-
-    token: {    
-        type: String,
-        required: false
-    }
 
 }, 
 
