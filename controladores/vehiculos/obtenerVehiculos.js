@@ -4,24 +4,39 @@ const Vehiculo = require('../../modelos/vehiculo');
 
 const obtenerVehiculos = async (req, res) => {
     try {
-        const vehiculos = await Vehiculo.find();    
+        const vehiculos = await Vehiculo.find();
         res.status(200).json(vehiculos);
     } catch (error) {
         res.status(400).json({ message: error.message });
-    }       
+    }
 };
 
-const obtenerVehiculoPorId = async (req, res) => {  
+const obtenerVehiculoPorId = async (req, res) => {
     try {
-        const id = req.params.id;
-        const vehiculo = await Vehiculo.findById(id).populate('usuario');           
-        if (!vehiculo) {
-            return res.status(404);
-        }           
-        res.status(200).json(vehiculo);
-    }catch (error) {     
+        const vehiculo = await Vehiculo.findById(req.params.id).populate('usuario');
 
-        res.status(400).json({ message: error.message });
+        if (!vehiculo) {
+            return res.status(404).json({ message: "Vehículo no encontrado" });
+        }
+
+        let usuarioData;
+
+        if (req.usuario) {
+            // Usuario logueado → mostramos toda la info
+            usuarioData = vehiculo.usuario;
+        } else {
+            // Usuario NO logueado → solo nombre
+            usuarioData = {
+                nombre: vehiculo.usuario.nombre
+            };
+        }
+
+        res.json({
+            ...vehiculo.toObject(),
+            usuario: usuarioData
+        });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
 };
 
