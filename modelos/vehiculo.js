@@ -45,12 +45,12 @@ const vehiculoSchema = new mongoose.Schema({
         required: true
     },
 
-    Transmisión: {
+    Transmision: {
         type: String,
         enum: ['Manual', 'Automatico']
     },
 
-    condición: {
+    condicion: {
         type: String,
         enum: ['Nuevo','Usado']
     },
