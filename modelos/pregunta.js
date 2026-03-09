@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
 
 const preguntaSchema = new mongoose.Schema({
-    vehicle: {
+    vehiculo: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Vehiculo",
         required: true
     },
-    user: {
+    usuario: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Usuario",
         required: true
     },
-    question: {
+    pregunta: {
         type: String,
         required: true
     },
