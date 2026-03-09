@@ -21,13 +21,15 @@ const crearPregunta = async (req, res) => {
         }
 
         // Crear la pregunta
-        const nuevaPregunta = await Pregunta.create({
+        const nuevaPregunta = await Pregunta({
             vehiculo: vehiculo,
             usuario: req.usuario.id, // usuario que hace la pregunta
             pregunta: pregunta.trim()
         });
 
-        return res.status(201).json({nuevaPregunta});
+        const preguntaGuardada = await nuevaPregunta.save();
+
+        return res.status(201).json({preguntaGuardada});
 
     } catch (error) {
 
