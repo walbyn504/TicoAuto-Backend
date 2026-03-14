@@ -36,6 +36,7 @@ app.use('/api', require('./rutas/vehiculos'));
 app.use('/api', require('./rutas/autenticacion'));
 app.use('/api', require('./rutas/pregunta'));
 app.use('/api', require('./rutas/respuestas'));
+app.use('/api', require('./rutas/conversacion'));
 
 //Inicialización del servidor
 app.listen(process.env.PORT, () => {
