@@ -27,8 +27,8 @@ const vehiculoSchema = new mongoose.Schema({
     },
     estado: {
         type: String,
-        enum: ['disponible', 'vendido'],
-        default: 'disponible'
+        enum: ['Disponible', 'Vendido'],
+        default: 'Disponible'
     },
     combustible: {
         type: String,
