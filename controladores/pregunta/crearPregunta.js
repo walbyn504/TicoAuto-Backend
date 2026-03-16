@@ -6,11 +6,6 @@ const crearPregunta = async (req, res) => {
     const { vehiculoId } = req.params;
     const { pregunta } = req.body;
 
-    if (!req.usuario) {
-        return res.status(401).json({
-            mensaje: "Usuario no autenticado."
-        });
-    }
 
     if (!vehiculoId || !pregunta || !pregunta.trim()) {
         return res.status(400).json({
