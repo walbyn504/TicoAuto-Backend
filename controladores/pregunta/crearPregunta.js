@@ -59,9 +59,7 @@ const crearPregunta = async (req, res) => {
 
         const preguntaGuardada = await nuevaPregunta.save();
 
-        return res.status(201).json({
-            pregunta: preguntaGuardada
-        });
+        res.status(201).json(preguntaGuardada);
 
     } catch (error) {
         return res.status(500).json({
