@@ -28,17 +28,20 @@ const marcarVendido = async (req, res) => {
         }
 
         // Verificar si ya estaba vendido
-        if (vehiculo.estado === "vendido") {
+        if (vehiculo.estado === "Vendido") {
             return res.status(400).json({
                 message: "El vehículo ya está marcado como vendido"
             });
         }
 
         // Actualizar estado
-        vehiculo.estado = "vendido";
+        vehiculo.estado = "Vendido";
         await vehiculo.save();
 
-        res.status(200).json({vehiculo});
+        res.status(200).json({
+            message: "Vehículo marcado como vendido correctamente",
+            vehiculo
+        });
 
     } catch (error) {
         res.status(500).json({
