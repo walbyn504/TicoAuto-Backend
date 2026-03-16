@@ -4,21 +4,46 @@ const marcarVendido = async (req, res) => {
     try {
         const id = req.params.id;
 
-        // Actualiza solo el estado a "vendido"
-        const vehiculoActualizado = await Vehiculo.findByIdAndUpdate(
-            id,
-            { estado: 'vendido' },
-            { new: true } // devuelve el documento actualizado
-        );
-
-        if (!vehiculoActualizado) {
-           return res.status(404);
+        // Verificar usuario autenticado
+        if (!req.usuario) {
+            return res.status(401).json({
+                message: "Usuario no autenticado"
+            });
         }
 
-        res.status(200).json(vehiculoActualizado);
+        // Buscar vehículo
+        const vehiculo = await Vehiculo.findById(id);
+
+        if (!vehiculo) {
+            return res.status(404).json({
+                message: "Vehículo no encontrado"
+            });
+        }
+
+        // Verificar que el vehículo pertenezca al usuario logueado
+        if (vehiculo.usuario.toString() !== req.usuario.id) {
+            return res.status(403).json({
+                message: "No tiene permiso para marcar este vehículo como vendido"
+            });
+        }
+
+        // Verificar si ya estaba vendido
+        if (vehiculo.estado === "vendido") {
+            return res.status(400).json({
+                message: "El vehículo ya está marcado como vendido"
+            });
+        }
+
+        // Actualizar estado
+        vehiculo.estado = "vendido";
+        await vehiculo.save();
+
+        res.status(200).json({vehiculo});
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({
+            message: error.message
+        });
     }
 };
 
