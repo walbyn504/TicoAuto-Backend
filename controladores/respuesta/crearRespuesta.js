@@ -51,7 +51,10 @@ const crearRespuesta = async (req, res) => {
 
         const respuestaCreada = await nuevaRespuesta.save();
 
-        res.status(201).json(respuestaCreada);
+        res
+            .status(201)
+            .json(respuestaCreada)
+            .location(`/api/vehiculos/${respuestaCreada._id}`)
         
     } catch (error) {
         res.status(500).json({
