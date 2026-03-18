@@ -53,9 +53,9 @@ const crearRespuesta = async (req, res) => {
 
         res
             .status(201)
-            .json(respuestaCreada)
-            .location(`/api/respuestas/${respuestaCreada._id}`);
-        
+            .location(`/api/respuestas/${respuestaCreada._id}`)
+            .json(respuestaCreada);
+
     } catch (error) {
         res.status(500).json({
             message: "Error al crear la respuesta"
